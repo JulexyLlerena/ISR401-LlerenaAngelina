@@ -209,15 +209,37 @@ memoria limitada.
 \textbf{Rol en el proceso de requisitos} &
 \textbf{Cuándo y cómo participa} \\
 \midrule
-& & \\
+Gerente de la extractora &
+Patrocinador del proyecto; contrató el desarrollo y es quien toma las decisiones de alcance que el jefe de planta no puede resolver solo (supuesto razonable, no explicitado en el texto). &
+Interviene al inicio para encargar el sistema y en las iteraciones de interfaz para concretar qué espera de la pantalla de operador y los reportes, ya que fue él quien pidió algo «parecido a lo que vio en otra planta». \\
 \midrule
-& & \\
+Jefe de planta (Ing. Marcelo Andrade) &
+Fuente principal de requisitos y validador técnico del sistema &
+Participa desde el inicio en las dos mañanas semanales disponibles; en el tramo secuencial valida las reglas de seguridad y, al cierre de cada iteración, revisa los prototipos de interfaz y autoriza el avance. \\
 \midrule
-& & \\
+Operadores de los tres turnos &
+Usuarios finales de la interfaz y los reportes &
+Participan en las iteraciones de interfaz, cuando el analista los convoca al inicio o al final de un turno para revisar prototipos de pantalla; también aportan en la elicitación inicial describiendo cómo operan hoy las válvulas y leen los instrumentos. \\
 \midrule
-& & \\
+Responsable de seguridad industrial &
+Aprobador formal de cada función de protección &
+Participa al cierre de cada función de protección del tramo secuencial: recibe la especificación, la coteja con las exigencias de la aseguradora y da su aprobación antes de que esa función pase a construcción. \\
 \midrule
-& & \\
+Aseguradora &
+Restricción externa que fija el estándar de documentación &
+Participa en dos momentos: al cierre del tramo secuencial, cuando recibe y aprueba el documento de requisitos de seguridad, y antes de la puesta en marcha, cuando revisa la evidencia de prueba de cada función de protección. \\
+\midrule
+Fabricante de los esterilizadores &
+Fuente de las reglas de seguridad estables &
+Participa al inicio del tramo secuencial, de forma indirecta, a través de sus especificaciones técnicas escritas; el analista las consulta para extraer las reglas de temperatura, presión y tiempos de bloqueo sin necesidad de reuniones. \\
+\midrule
+Proveedor de sensores y válvulas &
+Fuente de los requisitos de interfaz hardware-software &
+Participa a partir del mes 3, cuando se elige al proveedor; entrega las especificaciones del protocolo de comunicación que el analista usa para documentar los requisitos de interfaz hardware-software. \\
+\midrule
+Equipo de desarrollo (5 personas) &
+Conduce el proceso de requisitos; elicita, documenta, negocia y verifica los requisitos con todos los demás actores a lo largo de las cuatro fases. &
+Activo durante todo el proyecto; en el tramo secuencial lidera las entrevistas con el jefe de planta y la consulta de especificaciones del fabricante, y en las iteraciones facilita las demos con operadores y registra los cambios de alcance. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -237,13 +259,25 @@ memoria limitada.
 \textbf{Actividades transversales} &
 \textbf{Artefactos producidos} \\
 \midrule
-& & & \\
+1. Núcleo de seguridad (tramo secuencial, meses 1--3) &
+Domina la elicitación y la documentación. Se entrevista al jefe de planta y se consultan las especificaciones del fabricante para extraer las reglas de temperatura, presión y tiempos de bloqueo. Se negocia con el responsable de seguridad industrial el alcance exacto de cada función de protección. &
+Validación mediante revisión formal con el jefe de planta, el responsable de seguridad industrial y la aseguradora. Gestión: cada requisito se numera y se traza hasta la función de protección que implementa. &
+Documento de requisitos de seguridad aprobado por la aseguradora; escenarios de fallo (desborde de tanque, compuerta con presión residual); lista de funciones de protección con su criterio de aceptación. \\
 \midrule
-& & & \\
+2. Integración con sensores (a partir del mes 3) &
+Domina la elicitación técnica. Una vez elegido el proveedor, se obtienen las especificaciones del protocolo de comunicación y se documentan los requisitos de interfaz entre el controlador y los sensores y válvulas. &
+Validación mediante un prototipo de comunicación con el hardware real. Gestión: se verifica que los nuevos requisitos no modifiquen las funciones de seguridad ya aprobadas. &
+Requisitos de interfaz hardware-software; especificación del protocolo de comunicación del proveedor elegido; casos de prueba de integración. \\
 \midrule
-& & & \\
+3. Interfaz de operador y reportes (iteraciones) &
+Domina la negociación. El gerente pidió algo «parecido a lo que vio en otra planta»; en cada iteración se muestra un prototipo de pantalla al jefe de planta y a los operadores para concretar ese requisito vago. Se elicitan también los requisitos de reportes de producción. &
+Validación mediante demos con operadores representativos de los tres turnos. Gestión: seguimiento de los cambios pedidos entre iteraciones para controlar el crecimiento del alcance. &
+Prototipos de pantalla aprobados por iteración; escenarios de uso del operador; lista actualizada de requisitos de interfaz y reportes. \\
 \midrule
-& & & \\
+4. Puesta en marcha y evidencia (cierre, antes de la temporada alta) &
+Domina la documentación. Se consolida la evidencia de prueba de cada función de protección y se prepara el expediente completo para la aseguradora. &
+Validación final con pruebas de aceptación supervisadas por el responsable de seguridad industrial. Gestión: trazabilidad completa entre cada requisito, su caso de prueba y su resultado. &
+Evidencias de prueba por función de protección; matriz de trazabilidad requisito-prueba-resultado; acta de aprobación del responsable de seguridad industrial. \\
 \bottomrule
 \end{tabularx}
 \end{table}

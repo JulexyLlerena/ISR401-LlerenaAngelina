@@ -170,34 +170,28 @@ memoria limitada.
 
 \subsection{Recomendación y riesgos}
 
-\begin{table}[H]
-\centering
-\caption{Recomendación y riesgos del escenario 1}
-\small
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{3.5cm} Y
-}
+\begingroup\small\setlength{\tabcolsep}{4pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{3.3cm} >{\raggedright\arraybackslash}p{12.2cm}}
+\caption{Recomendación y riesgos del escenario 1}\\
 \toprule
 \textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Modelo recomendado & \\
+\endfirsthead
+\toprule
+\textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Razón 1 & \\
-\midrule
-Razón 2 & \\
-\midrule
-Razón 3 & \\
-\midrule
-Por qué se descartan los otros dos modelos & \\
-\midrule
-Tensión principal del escenario & \\
-\midrule
-Riesgo 1 y mitigación & \\
-\midrule
-Riesgo 2 y mitigación & \\
+\endhead
+\textbf{Modelo recomendado} & \textbf{Híbrido — cascada para el núcleo de seguridad + iterativo e incremental para el resto.}\par\medskip El núcleo de seguridad (funciones de bloqueo, control de temperatura y presión) sigue un tramo secuencial: se especifica completo, se aprueba con la aseguradora y no se reabre. La interfaz de operador, los reportes y la capa de comunicación con sensores se desarrollan en iteraciones que comienzan una vez elegido el proveedor en el mes 3. \\ \midrule
+\textbf{Razón 1 (K1)} & Las reglas de temperatura, presión máxima y tiempos de bloqueo están fijadas por el fabricante de los esterilizadores (dato). Eso las hace estables (K1), por lo que especificarlas y aprobarlas al inicio tiene bajo riesgo de quedar obsoletas, y el equipo puede congelar ese núcleo antes de comenzar cualquier implementación. \\ \midrule
+\textbf{Razón 2 (K4)} & El proveedor de sensores y válvulas no se elige hasta el mes 3 y el protocolo de comunicación sigue desconocido (dato). Ese es el riesgo técnico principal (K4): planificando una iteración de integración para después de esa fecha, el equipo avanza en las funciones de seguridad ya definidas sin bloquear el proyecto por la incertidumbre del hardware. \\ \midrule
+\textbf{Razón 3 (K5)} & La aseguradora exige un documento de requisitos de seguridad aprobado y evidencia de prueba de cada función de protección antes de la puesta en marcha (dato). Producir ese documento en el tramo secuencial del núcleo ---donde los requisitos son estables--- permite firmarlo con la aseguradora antes de comenzar las iteraciones; solo se actualiza para los cambios que surjan en interfaz y sensores, sin reabrir lo ya aprobado (K5). \\ \midrule
+\textbf{Por qué se descartan los otros dos modelos} & \textbf{Cascada:} Cerrar la arquitectura completa antes del mes 3 implica asumir un protocolo de comunicación con los sensores; si el proveedor elegido impone uno distinto, el rediseño puede invalidar trabajo ya aprobado y retrasar la puesta en marcha antes de la temporada alta.\par\medskip \textbf{Ágil puro:} Puede producir documentación técnica, pero añadirle la estructura formal que la aseguradora exige ---documento de requisitos de seguridad aprobado, trazabilidad requisito-prueba por cada función de protección--- le demanda más proceso del que el modelo prevé de forma natural. Además, la baja disponibilidad del jefe de planta (dos mañanas por semana) limita la cadencia de revisión: con esa ventana no es viable sostener sprints cortos que necesiten retroalimentación casi semanal del cliente para avanzar. \\ \midrule
+\textbf{Tensión principal del escenario} & La interfaz de operador y los reportes siguen indefinidos porque el gerente pide algo «parecido a lo que vio en otra planta». Esa vaguedad apunta a ágil: es exactamente el tipo de requisito que se aclara mejor mostrando versiones sucesivas al usuario. El modelo híbrido acepta esa tensión pero la resuelve solo en parte, porque la disponibilidad limitada del jefe de planta sigue siendo un freno para iterar rápido sobre la interfaz. \\ \midrule
+\textbf{Riesgo 1 y mitigación} & \textbf{Riesgo:} Un cambio en el protocolo de sensores descubierto al mes 3 podría afectar funciones de seguridad ya especificadas y aprobadas si la capa de comunicación quedó acoplada al núcleo durante la fase secuencial.\par\medskip \textbf{Mitigación:} Definir la interfaz entre la lógica de seguridad y la capa de sensores como un módulo abstracto desde el inicio, de modo que el núcleo aprobado no dependa del protocolo concreto del proveedor. \\ \midrule
+\textbf{Riesgo 2 y mitigación} & \textbf{Riesgo:} Las revisiones de fin de iteración pueden retrasarse porque el jefe de planta solo tiene dos mañanas disponibles por semana; si esos espacios se pierden, el aprobación se acumula y compromete el plazo de diez meses antes de la temporada alta.\par\medskip \textbf{Mitigación:} Acordar desde el inicio del proyecto que esas dos mañanas son la ventana fija de revisión, y que el responsable de seguridad industrial dispone de una lista de verificación por función de protección aprobada de antemano, para que su aprobación no dependa de una reunión adicional. \\ \midrule
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 \subsection{Actores y framework de Ingeniería de Requisitos}
 

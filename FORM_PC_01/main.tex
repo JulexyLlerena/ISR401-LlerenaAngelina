@@ -245,6 +245,27 @@ Riesgo 2 y mitigación & \\
 
 \subsection{Descripción del escenario}
 
+Sabores de la Abuela Rosa es un emprendimiento familiar de Quevedo que vende
+bolones, tigrillo, encebollado y tortillas de yuca en un local pequeño del
+centro de la ciudad. Recibe unos 70 pedidos diarios por una aplicación de
+mensajería; la dueña, Doña Rosa Mendoza, los anota en un cuaderno y con
+frecuencia se equivoca de dirección o pierde mensajes en las horas pico.
+
+Se requiere una aplicación móvil para que los clientes vean el menú del día,
+hagan pedidos, elijan retirar en el local o recibir a domicilio y paguen por
+transferencia (más adelante, quizá, con tarjeta). Doña Rosa responde a
+cualquier hora y prueba cada versión, pero cambia de idea con facilidad; su
+hijo propone funciones nuevas en cada reunión y el menú cambia casi a diario.
+La aplicación guardará nombres, direcciones y teléfonos de clientes, por lo
+que debe cumplir la Ley Orgánica de Protección de Datos Personales (LOPDP), y
+los pagos por transferencia deben conciliarse para evitar pedidos sin pagar.
+
+El presupuesto es fijo y pequeño, el plazo es de 14 semanas con fecha fija
+(fiestas de la ciudad) y el equipo está formado por dos desarrolladores a
+medio tiempo. Muchos clientes usan teléfonos Android de gama baja con datos
+móviles intermitentes, por lo que la aplicación debe ser liviana y tolerar
+cortes de conexión.
+
 \subsection{Matriz comparativa}
 
 \begin{table}[H]
@@ -261,15 +282,15 @@ Riesgo 2 y mitigación & \\
 \textbf{Ágil} \\
 \midrule
 
-\textbf{K1. Estabilidad y cambios} & & & \\
+\textbf{K1. Estabilidad y cambios} & \textbf{Baja adecuación.} Exige congelar los requisitos al inicio; con un menú diario y una dueña que cambia de idea, cada cambio obligaría a rehacer fases. & \textbf{Media.} Absorbe cambios entre iteraciones, pero sobre un plan de iteraciones definido de antemano que aquí quedaría obsoleto. & \textbf{Alta.} El backlog se reprioriza en cada sprint; los cambios se esperan y se gestionan sin romper el trabajo en curso. \\
 \midrule
-\textbf{K2. Partes interesadas y disponibilidad} & & & \\
+\textbf{K2. Partes interesadas y disponibilidad} & \textbf{Baja.} Desaprovecha a una dueña disponible a diario: solo participa al inicio y en la entrega final. & \textbf{Media-alta.} La dueña valida al final de cada iteración, aunque con menor frecuencia de la que puede ofrecer. & \textbf{Alta.} Doña Rosa actúa como Product Owner: decide, prioriza las ideas de su hijo y prueba cada incremento. \\
 \midrule
-\textbf{K3. Tipo de sistema y criticidad} & & & \\
+\textbf{K3. Tipo de sistema y criticidad} & \textbf{Media.} Su control formal es excesivo para una app comercial pequeña sin riesgo para la vida. & \textbf{Alta.} Permite revisar pagos y datos personales en cada iteración. & \textbf{Alta.} Suficiente si se fijan criterios de aceptación y pruebas para pagos por transferencia y datos de clientes. \\
 \midrule
-\textbf{K4. Riesgo principal} & & & \\
+\textbf{K4. Riesgo principal} & \textbf{Baja.} Entrega todo al final: si hay retraso no habrá nada para las fiestas, y el rendimiento en Android de gama baja se descubre tarde. & \textbf{Media-alta.} Hay versiones parciales utilizables y pruebas en dispositivos reales por iteración. & \textbf{Alta.} Fecha y costo fijos con alcance variable: siempre existe un MVP usable; la conectividad se prueba desde el primer mes. \\
 \midrule
-\textbf{K5. Documentación y marco normativo o contractual} & & & \\
+\textbf{K5. Documentación y marco normativo o contractual} & \textbf{Media-alta.} Su documentación facilita evidenciar el cumplimiento de la LOPDP, pero pesa demasiado para dos personas a medio tiempo. & \textbf{Media-alta.} Permite documentar por iteración con un esfuerzo moderado. & \textbf{Media.} Exige incluir explícitamente la LOPDP y la conciliación de pagos en la Definición de Hecho; el acuerdo informal de precio fijo se respalda con una priorización MoSCoW escrita. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -286,21 +307,21 @@ Riesgo 2 y mitigación & \\
 \toprule
 \textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Modelo recomendado & \\
+Modelo recomendado & Ágil (Scrum ligero): 7 sprints de 2 semanas, con fecha y presupuesto fijos y alcance variable priorizado como producto mínimo viable (MVP). \\
 \midrule
-Razón 1 & \\
+Razón 1 & La volatilidad de los requisitos es muy alta (menú diario, ideas nuevas de la dueña y su hijo); el backlog priorizado absorbe esos cambios sin rehacer fases. \\
 \midrule
-Razón 2 & \\
+Razón 2 & La dueña está disponible a diario y prueba cada versión, condición ideal para el rol de Product Owner y la validación continua. \\
 \midrule
-Razón 3 & \\
+Razón 3 & Con fecha fija y presupuesto cerrado, entregar por incrementos garantiza un MVP usable en la semana 8 y una versión estable en la semana 14; además, el equipo pequeño no puede sostener documentación pesada. \\
 \midrule
-Por qué se descartan los otros dos modelos & \\
+Por qué se descartan los otros dos modelos & Cascada: requiere requisitos estables, entrega todo al final y su documentación consume tiempo que el equipo no tiene. Iterativo e incremental: es viable, pero planifica las iteraciones de antemano y el contenido cambia demasiado para ese plan. \\
 \midrule
-Tensión principal del escenario & \\
+Tensión principal del escenario & Doña Rosa quiere ``tener todo listo'' para una fecha fija con presupuesto cerrado, pero cambia de idea con facilidad: alcance fijo y volatilidad alta no son compatibles, por lo que se fija la fecha y se negocia el alcance. \\
 \midrule
-Riesgo 1 y mitigación & \\
+Riesgo 1 y mitigación & \textbf{Riesgo:} el alcance crece con cada idea nueva (puntos, promociones, propuestas del hijo) y compromete la fecha. \textbf{Mitigación:} toda idea entra al backlog y nunca al sprint en curso; priorización MoSCoW acordada por escrito con la dueña. \\
 \midrule
-Riesgo 2 y mitigación & \\
+Riesgo 2 y mitigación & \textbf{Riesgo:} incumplir la LOPDP o aceptar pedidos sin pago. \textbf{Mitigación:} aviso de privacidad, consentimiento explícito, cifrado y eliminación de cuenta como historias obligatorias desde el sprint 1; ningún pedido pasa a cocina sin comprobante conciliado; ambos incluidos en la Definición de Hecho. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -321,15 +342,15 @@ Riesgo 2 y mitigación & \\
 \textbf{Rol en el proceso de requisitos} &
 \textbf{Cuándo y cómo participa} \\
 \midrule
-& & \\
+Doña Rosa Mendoza (dueña) & Product Owner y principal fuente de requisitos del negocio; decide el alcance y prioriza el backlog. & Durante todo el proyecto: entrevistas y talleres al inicio, revisión y prueba de cada incremento al final de cada sprint, respuestas diarias por mensajería. \\
 \midrule
-& & \\
+Hijo de Doña Rosa (redes sociales) & Stakeholder que propone funciones de promoción y fidelización. & En las reuniones de revisión; sus ideas se registran en el backlog y se priorizan con la dueña, nunca dentro del sprint en curso. \\
 \midrule
-& & \\
+Clientes del emprendimiento & Usuarios finales; fuente de requisitos de usabilidad, rendimiento y conectividad. & Encuesta corta al inicio, pruebas con 3 a 5 clientes frecuentes en el sprint de pedidos y piloto real del MVP en la semana 8. \\
 \midrule
-& & \\
+Desarrolladores (2, medio tiempo) & Equipo que elicita, analiza, documenta y valida los requisitos; uno actúa además como Scrum Master. & En todos los sprints: planificación, estimación, construcción, demostraciones y mantenimiento de la trazabilidad. \\
 \midrule
-& & \\
+Personal de cocina, despacho y repartidor & Usuarios internos del panel de pedidos y de la información de entrega. & Observación de una hora pico al inicio, entrevista sobre direcciones y validación del flujo de pedidos y pagos antes del piloto. \\
 \bottomrule
 \end{tabularx}
 \end{table}
@@ -349,13 +370,13 @@ Riesgo 2 y mitigación & \\
 \textbf{Actividades transversales} &
 \textbf{Artefactos producidos} \\
 \midrule
-& & & \\
+Sprint 0 (semanas 1--2): visión y backlog inicial & \textbf{Elicitación:} entrevista con Doña Rosa y su hijo, observación de una hora pico, revisión del cuaderno y los chats, encuesta a clientes. \textbf{Negociación:} separar necesidades de deseos y acordar el MVP. \textbf{Documentación:} visión, historias de usuario y requisitos no funcionales (LOPDP, peso de la app, modo sin conexión). & \textbf{Validación:} la dueña aprueba el MVP y la priorización MoSCoW por escrito. \textbf{Gestión:} backlog como línea base, matriz de trazabilidad y acuerdo de comunicación (revisión quincenal, canal único de ideas). & Visión del producto, mapa de historias, backlog priorizado con criterios de aceptación, matriz de trazabilidad, acta MoSCoW. \\
 \midrule
-& & & \\
+Sprints 1--3 (semanas 3--8): menú, pedidos y pago por transferencia (MVP) & \textbf{Elicitación:} talleres sobre el menú diario y la verificación de transferencias; entrevista al repartidor; pruebas con 3 a 5 clientes. \textbf{Negociación:} edición simple del menú desde el teléfono, referencia y GPS opcional en direcciones, estado ``pendiente de pago''. \textbf{Documentación:} historias de menú, carrito, entrega, comprobante y conciliación. & \textbf{Validación:} demos en Android de gama baja, pruebas de aceptación con pedidos simulados en hora pico y piloto real del MVP durante una semana. \textbf{Gestión:} ideas nuevas registradas y pospuestas; trazabilidad de los errores del cuaderno a las historias; revisión LOPDP del MVP. & Prototipos en papel o Figma, historias con criterios de aceptación, Definición de Hecho, incremento MVP, informe del piloto. \\
 \midrule
-& & & \\
+Sprints 4--5 (semanas 9--12): tolerancia a cortes, rendimiento y fidelización & \textbf{Elicitación:} métricas del piloto (fallos de conexión, tiempos de carga, quejas); taller sobre puntos o promociones. \textbf{Negociación:} priorizar el modo sin conexión y elegir una sola opción de fidelización según presupuesto y plazo. \textbf{Documentación:} requisitos no funcionales medibles (p. ej., app menor a 15 MB, menú visible sin conexión) e historias de la opción elegida. & \textbf{Validación:} pruebas en teléfonos de gama baja con datos intermitentes; revisión del sprint con la familia y algunos clientes. \textbf{Gestión:} repriorización del backlog con datos del piloto; la opción descartada queda registrada para después de las fiestas. & Backlog actualizado, requisitos no funcionales medibles, matriz de trazabilidad actualizada, incremento con modo sin conexión y notificaciones. \\
 \midrule
-& & & \\
+Sprint 6 (semanas 13--14): estabilización para las fiestas & \textbf{Elicitación:} revisión de defectos reportados y previsión del doble de pedidos. \textbf{Negociación:} congelar el alcance; no entran funciones nuevas. \textbf{Documentación:} ajustes finales, manual breve para la dueña y aviso de privacidad definitivo. & \textbf{Validación:} prueba de carga con el doble de pedidos y aceptación final de Doña Rosa. \textbf{Gestión:} línea base final de requisitos y backlog posterior a las fiestas (pago con tarjeta, opción de fidelización descartada). & Versión estable publicada, manual de uso, aviso de privacidad, acta de aceptación, backlog para la siguiente etapa. \\
 \bottomrule
 \end{tabularx}
 \end{table}

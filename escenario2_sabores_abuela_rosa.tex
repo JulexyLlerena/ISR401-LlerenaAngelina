@@ -1,0 +1,518 @@
+% =====================================================================
+%  Artículo: Selección de un modelo de proceso de software para una
+%  aplicación móvil de pedidos (Sabores de la Abuela Rosa)
+%  Compilar con pdfLaTeX (Overleaf o TeX Live/MiKTeX). Referencias IEEE.
+% =====================================================================
+\documentclass[11pt,a4paper]{article}
+
+% ---------- Idioma y codificación ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla,es-nodecimaldot]{babel}
+
+% ---------- Tipografía y página ----------
+\usepackage{mathptmx}            % Times, estilo de artículo científico
+\usepackage{microtype}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{setspace}
+\setstretch{1.1}
+
+% ---------- Tablas ----------
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{ragged2e}
+\newcolumntype{L}{>{\RaggedRight\arraybackslash}X}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{P}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+
+% ---------- Otros ----------
+\usepackage{xcolor}
+\usepackage{enumitem}
+\setlist{nosep,leftmargin=*}
+\usepackage[font=small,labelfont=bf,labelsep=period]{caption}
+\usepackage{titlesec}
+\titleformat{\section}{\normalfont\large\bfseries}{\Roman{section}.}{0.6em}{\MakeUppercase}
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{\Alph{subsection}.}{0.5em}{}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\fancyhead[R]{\small\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\usepackage{cite}                 % citas numéricas [1], [2] estilo IEEE
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+\urlstyle{same}
+
+% ---------- Datos del artículo ----------
+\title{\textbf{Selección fundamentada de un modelo de proceso de software
+para una aplicación móvil de pedidos: comparación de los modelos
+cascada, iterativo y ágil en un emprendimiento gastronómico}}
+
+\author{%
+  Nombre Apellido del estudiante\\[2pt]
+  \small Carrera / Asignatura: Ingeniería de Requisitos\\
+  \small Universidad --- Quevedo, Ecuador
+}
+\date{12 de noviembre de 2026}
+
+% =====================================================================
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+
+% ---------------------------------------------------------------------
+\begin{abstract}
+\noindent
+Este trabajo selecciona el modelo de proceso de software más adecuado para
+desarrollar una aplicación móvil de pedidos destinada a \emph{Sabores de la
+Abuela Rosa}, un emprendimiento ficticio de comida típica en Quevedo
+(Ecuador). Se identificaron los actores del proceso, se definieron siete
+criterios de comparación (estabilidad de requisitos, criticidad,
+disponibilidad del cliente, tamaño, regulación, plazo y presupuesto, y riesgo
+técnico) y se valoró cada modelo con una escala de 1 a 5. El modelo ágil
+obtuvo 31 de 35 puntos, frente a 27 del iterativo y 16 de la cascada. Se
+recomienda Scrum ligero con sprints de dos semanas, fecha y presupuesto fijos
+y alcance variable, priorizado como producto mínimo viable (MVP). Para cubrir
+la debilidad del ágil en regulación, los requisitos de la Ley Orgánica de
+Protección de Datos Personales (LOPDP) y la conciliación de pagos se
+incorporan a la Definición de Hecho desde el primer sprint. Finalmente, se
+detallan las actividades centrales y transversales del framework de
+Ingeniería de Requisitos (IR) que se ejecutan en cada uno de los siete
+sprints.
+
+\medskip
+\noindent\textbf{Palabras clave:} modelos de proceso de software, desarrollo
+ágil, Scrum, ingeniería de requisitos, aplicación móvil, protección de datos
+personales.
+\end{abstract}
+
+% ---------------------------------------------------------------------
+\section{Introducción}
+
+La elección del modelo de proceso condiciona la organización del trabajo,
+el cumplimiento de plazos y la calidad del producto; no existe un modelo
+universal, sino uno adecuado a las características de cada proyecto
+\cite{otavo2024,mex2025}. Este artículo aplica esa idea a un caso concreto:
+una aplicación móvil de pedidos para un emprendimiento familiar.
+
+\emph{Sabores de la Abuela Rosa} (organización ficticia) vende bolones,
+tigrillo, encebollado y tortillas de yuca en un local pequeño del centro de
+Quevedo. Recibe unos 70 pedidos diarios por una aplicación de mensajería;
+la dueña, Doña Rosa Mendoza (persona ficticia), los anota en un cuaderno y
+con frecuencia se equivoca de dirección o pierde mensajes en las horas pico.
+
+El producto solicitado debe permitir a los clientes ver el menú del día,
+hacer pedidos, elegir retiro en el local o entrega a domicilio y pagar por
+transferencia (más adelante, quizá, con tarjeta). El objetivo del trabajo es
+comparar los modelos cascada, iterativo y ágil en este escenario,
+seleccionar uno de forma fundamentada y describir cómo se ejecuta el
+framework de IR en cada iteración.
+
+La Tabla~\ref{tab:datos} resume los datos clave del escenario.
+
+\begin{table}[htbp]
+\centering
+\caption{Datos clave del escenario.}
+\label{tab:datos}
+\small
+\begin{tabularx}{\textwidth}{@{}P{4.2cm}L@{}}
+\toprule
+\textbf{Dato} & \textbf{Valor} \\
+\midrule
+Equipo & 2 desarrolladores a medio tiempo \\
+Plazo & 14 semanas, fecha fija (fiestas de la ciudad) y presupuesto cerrado \\
+Disponibilidad del cliente & Muy alta: la dueña responde a diario y prueba cada versión \\
+Volatilidad esperada & Muy alta: menú diario, ideas nuevas de la dueña y de su hijo en cada reunión \\
+Criticidad & Media: pagos por transferencia y datos personales; sin riesgo para la vida \\
+Marco normativo o contractual & LOPDP de Ecuador \cite{lopdp2021,reglamento2023}; acuerdo informal de precio fijo \\
+Restricción técnica & Android de gama baja y datos móviles intermitentes: app liviana y tolerante a cortes \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ---------------------------------------------------------------------
+\section{Marco teórico}
+
+\subsection{Modelos de proceso}
+
+El \textbf{modelo en cascada} organiza el desarrollo en fases secuenciales
+(análisis, diseño, implementación, verificación y mantenimiento) y exige
+requisitos completos y estables al inicio, porque el cambio posterior es
+costoso \cite{otavo2024}. El \textbf{modelo iterativo} construye el sistema
+en ciclos sucesivos planificados de antemano, cada uno con una versión
+parcial que se revisa con el cliente. Los \textbf{métodos ágiles}, como
+Scrum, trabajan en iteraciones cortas (\emph{sprints}) sobre un backlog
+priorizado que se reordena continuamente, con participación constante del
+cliente y entregas frecuentes de software funcionando \cite{schon2017}.
+
+En la práctica, pocos equipos aplican un método en forma pura: en una
+encuesta internacional de 556 casos, menos del 15\,\% trabajaba de manera
+exclusivamente ágil o tradicional, y la agilidad dependía más de las
+prácticas elegidas que del nombre del método \cite{kuhrmann2022}.
+
+\subsection{Ingeniería de requisitos en contextos ágiles}
+
+En la IR ágil, las actividades de elicitación, documentación, validación,
+negociación y gestión no son fases separadas: se repiten en cada iteración
+y solo se detalla lo necesario para el siguiente ciclo, apoyándose en
+historias de usuario, prototipos y un backlog priorizado \cite{schon2017}.
+Entre sus desafíos destacan el descuido de los requisitos no funcionales
+\cite{schon2017}, la gestión del conocimiento sobre requisitos que cambian
+\cite{kasauli2021} y la especificación de requisitos de privacidad exigidos
+por la ley \cite{canedo2022}.
+
+% ---------------------------------------------------------------------
+\section{Metodología}
+
+El trabajo siguió cuatro pasos: (1) análisis del escenario e identificación
+de actores; (2) definición de criterios de comparación; (3) valoración de
+cada modelo por criterio en una matriz y elección del modelo; y
+(4) descripción del framework de IR por iteración para el modelo elegido.
+
+\subsection{Actores del proceso}
+
+La dueña concentra la decisión y el conocimiento del negocio; por eso actúa
+como \emph{Product Owner}, mientras el hijo y los clientes son fuentes de
+requisitos que ella prioriza (Tabla~\ref{tab:actores}).
+
+\begin{table}[htbp]
+\centering
+\caption{Actores del proceso.}
+\label{tab:actores}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}P{3.1cm}P{2.0cm}LP{1.5cm}L@{}}
+\toprule
+\textbf{Actor} & \textbf{Tipo} & \textbf{Interés principal} & \textbf{Influencia} & \textbf{Rol en el proceso} \\
+\midrule
+Doña Rosa Mendoza (dueña) & Cliente / patrocinadora & Pedidos sin errores, cobrar todo, estar lista para las fiestas & Alta & \emph{Product Owner}: prioriza el backlog, valida cada incremento, decide el alcance \\
+Hijo de Doña Rosa (redes sociales) & Stakeholder interno & Promociones, fidelización, difusión en redes & Media & Proponente de funciones; sus ideas entran al backlog y se priorizan con la dueña \\
+Clientes finales & Usuarios & Pedir rápido desde Android de gama baja, con datos intermitentes & Media & Fuente de requisitos de usabilidad; participan en pruebas piloto \\
+Desarrolladores (2, medio tiempo) & Equipo de desarrollo & Alcance realista, requisitos claros por sprint & Alta (técnica) & Analizan, estiman, construyen y prueban; uno asume además el rol de \emph{Scrum Master} \\
+Personal de cocina y despacho & Usuario interno & Ver pedidos claros, con dirección y estado de pago & Baja & Usuario del panel de pedidos; valida el flujo operativo \\
+Repartidor(es) & Usuario interno & Dirección exacta, referencia y teléfono del cliente & Baja & Usuario de la información de entrega \\
+Banco / entidad de la transferencia & Actor externo & Ninguno directo & Baja & Origen de los comprobantes que deben conciliarse \\
+Superintendencia de Protección de Datos Personales & Regulador & Cumplimiento de la LOPDP & Alta (normativa) & Fuente de requisitos no funcionales obligatorios: consentimiento, finalidad, seguridad, derechos del titular \cite{lopdp2021,reglamento2023} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Criterios de comparación}
+
+Se usaron siete criterios: los cinco solicitados por la actividad más dos
+que el escenario vuelve decisivos, el plazo fijo y el riesgo técnico
+(Tabla~\ref{tab:criterios}). Cada modelo se valoró según su adecuación al
+criterio con la escala: 1 = muy poco adecuado, 2 = poco adecuado,
+3 = aceptable, 4 = adecuado y 5 = muy adecuado.
+
+\begin{table}[htbp]
+\centering
+\caption{Criterios de comparación.}
+\label{tab:criterios}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}C{0.7cm}P{3.0cm}LL@{}}
+\toprule
+\textbf{\#} & \textbf{Criterio} & \textbf{Qué evalúa} & \textbf{Situación en el escenario} \\
+\midrule
+C1 & Estabilidad de requisitos & Cuánto cambiarán los requisitos durante el proyecto & Muy baja: menú diario, puntos vs.\ promociones, ideas nuevas en cada reunión \\
+C2 & Criticidad & Daño posible si el software falla & Media: pérdidas económicas y datos personales expuestos; sin riesgo para la vida \\
+C3 & Disponibilidad del cliente & Frecuencia con que el cliente puede participar y validar & Muy alta: responde a diario y prueba cada versión \\
+C4 & Tamaño del proyecto y del equipo & Volumen de funcionalidades y personas & Pequeño: 2 desarrolladores a medio tiempo, pocas funciones núcleo \\
+C5 & Regulación & Exigencias legales o contractuales de documentación y control & Media: LOPDP obligatoria; contrato informal de precio fijo \\
+C6 & Plazo y presupuesto & Rigidez de la fecha y del costo & Fijos: 14 semanas y presupuesto pequeño cerrado \\
+C7 & Riesgo técnico & Incertidumbre tecnológica & Media: Android de gama baja, conexión intermitente, conciliación de transferencias \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+% ---------------------------------------------------------------------
+\section{Resultados}
+
+\subsection{Matriz comparativa}
+
+El modelo ágil obtuvo 31 de 35 puntos, frente a 27 del iterativo y 16 de la
+cascada; la cascada solo supera a los demás en regulación
+(Tabla~\ref{tab:matriz}).
+
+\begin{table}[htbp]
+\centering
+\caption{Matriz comparativa de los modelos cascada, iterativo y ágil (escala 1--5).}
+\label{tab:matriz}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}P{2.6cm}LLL@{}}
+\toprule
+\textbf{Criterio} & \textbf{Cascada} & \textbf{Iterativo} & \textbf{Ágil} \\
+\midrule
+C1 Estabilidad de requisitos (muy baja) &
+\textbf{1} --- exige requisitos congelados al inicio; cada cambio de Doña Rosa obligaría a rehacer fases &
+\textbf{3} --- absorbe cambios entre iteraciones, pero con un plan de iteraciones definido de antemano &
+\textbf{5} --- el backlog se reprioriza cada sprint; los cambios se esperan y se gestionan \\
+\addlinespace
+C2 Criticidad (media) &
+\textbf{3} --- su control formal sobra para un sistema sin riesgo vital &
+\textbf{4} --- permite revisar seguridad y pagos en cada iteración &
+\textbf{4} --- suficiente si se fijan criterios de aceptación y pruebas para pagos y datos \\
+\addlinespace
+C3 Disponibilidad del cliente (muy alta) &
+\textbf{2} --- desaprovecha al cliente: solo participa al inicio y en la entrega &
+\textbf{4} --- el cliente valida al final de cada iteración &
+\textbf{5} --- la dueña prueba cada incremento y actúa como \emph{Product Owner} \\
+\addlinespace
+C4 Tamaño (pequeño) &
+\textbf{2} --- la documentación por fase consume tiempo que el equipo no tiene &
+\textbf{4} --- estructura ligera y manejable &
+\textbf{5} --- ceremonias mínimas, adecuado para equipos pequeños \\
+\addlinespace
+C5 Regulación (LOPDP; contrato informal) &
+\textbf{4} --- su documentación facilita evidenciar cumplimiento &
+\textbf{4} --- permite documentar por iteración &
+\textbf{3} --- exige incluir explícitamente requisitos de privacidad en la Definición de Hecho \\
+\addlinespace
+C6 Plazo y presupuesto fijos &
+\textbf{2} --- entrega todo al final; un retraso deja a la dueña sin nada para las fiestas &
+\textbf{4} --- hay versiones parciales utilizables &
+\textbf{5} --- fecha y costo fijos con alcance variable: siempre existe un producto usable priorizado \\
+\addlinespace
+C7 Riesgo técnico &
+\textbf{2} --- el rendimiento real se descubre tarde &
+\textbf{4} --- se prueba en dispositivos reales en cada iteración &
+\textbf{4} --- pruebas tempranas con clientes reales en sus teléfonos \\
+\midrule
+\textbf{Total (máx.\ 35)} & \textbf{16} & \textbf{27} & \textbf{31} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\noindent\textbf{Modelo elegido para el escenario: ágil (Scrum ligero).}
+
+\subsection{Recomendación fundamentada}
+
+Se recomienda Scrum ligero con siete sprints de dos semanas (uno de inicio y
+seis de desarrollo), un MVP usable desde la semana 8 y la versión para las
+fiestas en la semana 14. Las razones son cinco:
+
+\begin{enumerate}
+  \item \textbf{La volatilidad es el factor dominante.} Con el menú cambiando
+  a diario y nuevas ideas en cada reunión, un modelo que congela requisitos
+  fracasaría o se rehacería varias veces. En proyectos de tres meses, los
+  equipos Scrum superaron a los de cascada en gestión del cambio,
+  planificación y adaptabilidad \cite{mex2025}.
+  \item \textbf{El cliente está disponible.} La participación diaria de la
+  dueña es la condición que el ágil necesita y que la cascada desperdicia;
+  la participación continua del cliente es un factor crítico de éxito de la
+  IR ágil \cite{schon2017}.
+  \item \textbf{La fecha es inamovible y el presupuesto, cerrado.} Con
+  alcance variable, lo que no alcance en 14 semanas queda fuera, pero lo
+  esencial siempre funciona.
+  \item \textbf{El equipo es pequeño.} Dos personas a medio tiempo no pueden
+  sostener la documentación pesada de la cascada.
+  \item \textbf{El riesgo técnico se reduce pronto.} Probar cada incremento
+  en teléfonos Android de gama baja revela problemas de peso y conectividad
+  desde el primer mes.
+\end{enumerate}
+
+El modelo iterativo también sería viable (27 puntos), pero planifica las
+iteraciones de antemano y aquí el contenido cambia demasiado para ese plan.
+Además, el modelo ágil se adapta en lugar de aplicarse en forma pura, en
+línea con la evidencia de que la mayoría de los equipos combina prácticas
+\cite{kuhrmann2022}.
+
+\paragraph{Controles para la debilidad del ágil.}
+Los problemas más frecuentes del ágil incluyen requisitos volátiles, clientes
+que cambian de opinión, contratos de precio fijo y presión de plazos
+\cite{meckenstock2024}. Para mitigarlos se establecen:
+
+\begin{itemize}
+  \item Requisitos de la LOPDP como historias obligatorias desde el sprint~1:
+  aviso de privacidad, consentimiento explícito, uso de datos solo para el
+  pedido, cifrado y derecho a eliminar la cuenta
+  \cite{canedo2022,lopdp2021,reglamento2023}.
+  \item Una Definición de Hecho que incluya prueba en Android de gama baja,
+  funcionamiento con conexión intermitente y revisión del manejo de datos
+  personales, para no descuidar los requisitos no funcionales
+  \cite{schon2017}.
+  \item Conciliación de transferencias como requisito obligatorio: ningún
+  pedido pasa a cocina sin pago confirmado, o se muestra como
+  ``pendiente de pago''.
+  \item Priorización MoSCoW acordada por escrito con la dueña, porque el
+  contrato de precio fijo es informal.
+  \item Regla de cambios: las ideas nuevas (puntos, promociones, propuestas
+  del hijo) entran al backlog, nunca al sprint en curso.
+\end{itemize}
+
+La Tabla~\ref{tab:moscow} presenta el alcance priorizado.
+
+\begin{table}[htbp]
+\centering
+\caption{Alcance priorizado con MoSCoW.}
+\label{tab:moscow}
+\small
+\begin{tabularx}{\textwidth}{@{}P{3.2cm}L@{}}
+\toprule
+\textbf{Prioridad} & \textbf{Funcionalidades} \\
+\midrule
+\emph{Must} (MVP) & Menú del día editable por la dueña, carrito y pedido, retiro o domicilio con dirección y referencia, pago por transferencia con carga de comprobante, panel de pedidos y conciliación, consentimiento de datos \\
+\emph{Should} & Modo sin conexión (caché del menú y cola de pedidos), notificaciones de estado, historial de pedidos \\
+\emph{Could} & Promociones por día o programa de puntos (se elige uno), compartir en redes \\
+\emph{Won't} (esta versión) & Pago con tarjeta, múltiples locales \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Framework de IR por iteración}
+
+En el modelo ágil, las cuatro actividades centrales de IR ---elicitación,
+análisis y negociación, especificación y validación--- se repiten en cada
+sprint a pequeña escala \cite{schon2017}, mientras que las transversales
+---gestión de cambios, trazabilidad, priorización y comunicación con los
+actores--- se ejecutan de forma continua durante las 14 semanas
+\cite{kasauli2021}. La Tabla~\ref{tab:framework} detalla su ejecución.
+
+% ---------- Tabla horizontal del framework ----------
+\begin{landscape}
+\begin{table}[p]
+\centering
+\caption{Actividades centrales y transversales del framework de IR en cada sprint.}
+\label{tab:framework}
+\scriptsize
+\renewcommand{\arraystretch}{1.25}
+\begin{tabularx}{\linewidth}{@{}P{1.6cm}P{2.2cm}LLLLL@{}}
+\toprule
+\textbf{Sprint (semanas)} & \textbf{Objetivo del sprint} & \textbf{Elicitación} & \textbf{Análisis y negociación} & \textbf{Especificación} & \textbf{Validación} & \textbf{Transversales destacadas} \\
+\midrule
+Sprint 0 (1--2) & Visión y backlog inicial &
+Entrevista con Doña Rosa y su hijo; observación de una hora pico; revisión del cuaderno y los chats; encuesta corta a clientes &
+Identificar actores, separar necesidades de deseos, primera negociación del MVP &
+Visión del producto, mapa de historias, backlog inicial con criterios de aceptación, requisitos no funcionales (LOPDP, peso de la app, modo sin conexión) &
+La dueña aprueba el MVP y la priorización MoSCoW por escrito &
+Backlog como línea base; matriz de trazabilidad requisito $\rightarrow$ historia $\rightarrow$ prueba; acuerdo de comunicación (revisión quincenal, canal único de ideas) \\
+\addlinespace
+Sprint 1 (3--4) & Menú del día y catálogo &
+Taller con la dueña sobre cómo cambia el menú y la disponibilidad diaria &
+Simplificar la edición del menú para que la dueña la haga desde el teléfono &
+Historias del menú y del panel de administración; prototipo en papel o Figma &
+Demo en un Android de gama baja; la dueña publica un menú real &
+Cambios de la demo registrados en el backlog; historias de privacidad (aviso y consentimiento) incluidas \\
+\addlinespace
+Sprint 2 (5--6) & Pedido, retiro o domicilio &
+Prueba con 3--5 clientes frecuentes; entrevista al repartidor sobre direcciones &
+Resolver el problema de direcciones: referencia, ubicación GPS opcional, teléfono &
+Historias de carrito, pedido y entrega; reglas de validación de dirección &
+Prueba de aceptación con pedidos simulados en hora pico &
+Trazabilidad de los errores del cuaderno a las historias que los resuelven; ideas del hijo registradas y pospuestas \\
+\addlinespace
+Sprint 3 (7--8) & Pago por transferencia y conciliación (\textbf{MVP}) &
+Sesión con la dueña sobre cómo verifica hoy las transferencias &
+Negociar el flujo: pedido ``pendiente de pago'' hasta confirmar el comprobante &
+Historias de carga de comprobante, estados del pedido y conciliación; requisitos de seguridad de datos &
+Piloto real del MVP con clientes conocidos durante una semana &
+Gestión de riesgos: pedidos sin pagar; revisión de cumplimiento LOPDP del MVP \\
+\addlinespace
+Sprint 4 (9--10) & Tolerancia a cortes y rendimiento &
+Métricas del piloto: fallos de conexión, tiempos de carga, quejas &
+Priorizar el modo sin conexión frente a nuevas funciones solicitadas &
+Requisitos no funcionales medibles (p.\,ej., app menor a 15\,MB, menú visible sin conexión) &
+Pruebas en teléfonos de gama baja con datos móviles intermitentes &
+Repriorización del backlog con datos del piloto; actualización de la trazabilidad \\
+\addlinespace
+Sprint 5 (11--12) & Fidelización y notificaciones &
+Taller con la dueña y el hijo: puntos o promociones por día &
+Negociación: se elige una sola opción según presupuesto y plazo restante &
+Historias de la opción elegida y notificaciones de estado del pedido &
+Revisión del sprint con la familia y algunos clientes &
+Control de cambios: la opción descartada queda en el backlog para después de las fiestas \\
+\addlinespace
+Sprint 6 (13--14) & Estabilización para las fiestas &
+Revisión de defectos reportados; previsión de demanda (el doble de pedidos) &
+Decidir qué se congela: no entran funciones nuevas &
+Ajustes finales; manual breve para la dueña y aviso de privacidad definitivo &
+Prueba de carga con el doble de pedidos; aceptación final de Doña Rosa &
+Línea base final de requisitos; backlog posterior a las fiestas (pago con tarjeta, opción de fidelización descartada) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+\end{landscape}
+
+% ---------------------------------------------------------------------
+\section{Discusión}
+
+Los resultados coinciden con la literatura. Otavo Piraban y Pardo Moreno
+\cite{otavo2024} emplean también un cuadro comparativo con criterios del
+proyecto para elegir el proceso de una aplicación de pagos electrónicos, y
+optan por un enfoque iterativo ante requisitos cambiantes y normas que
+evolucionan. Mex Alvarez \emph{et al.} \cite{mex2025} observaron que la
+cascada solo destaca en gestión de requisitos y muestra rigidez ante el
+cambio, lo que respalda su baja valoración en C1, C3 y C6.
+
+La elección del ágil no ignora sus riesgos. Meckenstock \cite{meckenstock2024}
+identifica 90 problemas del desarrollo ágil, entre los que destacan la
+presión de entrega y el comportamiento cambiante del cliente; por eso se
+añadieron la regla de cambios y la priorización MoSCoW por escrito. En
+cuanto a la privacidad, Canedo \emph{et al.} \cite{canedo2022} muestran que,
+tras la entrada en vigor de una ley de datos similar a la LOPDP, la mayoría
+de los equipos ágiles especifica la privacidad con historias de usuario y
+considera que los requisitos son el área más afectada, lo que justifica
+tratarla como historias obligatorias desde el sprint~1. La
+Tabla~\ref{tab:respaldo} resume la relación entre cada decisión y la
+evidencia que la respalda.
+
+\begin{table}[htbp]
+\centering
+\caption{Respaldo de las decisiones en la literatura científica y la normativa.}
+\label{tab:respaldo}
+\footnotesize
+\begin{tabularx}{\textwidth}{@{}P{4.3cm}LC{1.3cm}@{}}
+\toprule
+\textbf{Decisión de la actividad} & \textbf{Qué aporta la evidencia} & \textbf{Ref.} \\
+\midrule
+Matriz comparativa con criterios ponderados & Cuadro comparativo de modelos según los criterios del proyecto para una app de pagos electrónicos; se elige un enfoque iterativo por requisitos cambiantes & \cite{otavo2024} \\
+Cascada con baja valoración en volatilidad, plazo y gestión del cambio & En proyectos de 3 meses, Scrum superó a cascada en gestión del cambio, planificación y adaptabilidad & \cite{mex2025} \\
+IR repetida en cada sprint y participación diaria de la dueña & Las actividades de IR se repiten en cada iteración; la participación continua del cliente es factor crítico de éxito & \cite{schon2017} \\
+Requisitos no funcionales en la Definición de Hecho & El descuido de los requisitos no funcionales es un desafío típico del ágil que provoca retrabajo & \cite{schon2017} \\
+Privacidad como historias obligatorias desde el sprint 1 & Los equipos ágiles especifican la privacidad con historias de usuario tras la ley de datos & \cite{canedo2022} \\
+Controles contra las debilidades del ágil & Requisitos volátiles, cliente cambiante, precio fijo y presión de plazos son problemas frecuentes & \cite{meckenstock2024} \\
+Scrum ligero adaptado (no puro) & Menos del 15\,\% trabaja de forma puramente ágil o tradicional & \cite{kuhrmann2022} \\
+Gestión de cambios y trazabilidad como transversales & 24 desafíos de IR en contextos ágiles, entre ellos gestionar el conocimiento de requisitos que cambian & \cite{kasauli2021} \\
+Criterio C5 y requisitos de consentimiento, finalidad y eliminación & Marco legal obligatorio para tratar datos de clientes en Ecuador & \cite{lopdp2021,reglamento2023} \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Como limitación, la valoración de la matriz es cualitativa y depende del
+juicio del analista; otro equipo podría asignar puntajes distintos, aunque es
+poco probable que cambie el orden de los modelos dada la diferencia de 15
+puntos entre ágil y cascada. Además, la LOPDP fue reformada en su
+artículo~43 (notificación de brechas) por la Ley Orgánica para el
+Fortalecimiento de la Ciberseguridad de mayo de 2026, por lo que conviene
+verificar la normativa vigente al implementar el sistema.
+
+% ---------------------------------------------------------------------
+\section{Conclusiones}
+
+\begin{itemize}
+  \item La alta volatilidad de los requisitos y la gran disponibilidad de la
+  dueña hacen del ágil el modelo más adecuado (31/35); la cascada es el menos
+  adecuado (16/35) porque congela los requisitos y entrega todo al final.
+  \item La fecha fija se protege con alcance variable: el MVP (menú, pedido,
+  entrega, pago por transferencia y consentimiento de datos) está listo en la
+  semana~8, y las seis semanas restantes mejoran la calidad y añaden
+  funciones según su prioridad.
+  \item La debilidad del ágil en regulación se compensa incluyendo la LOPDP y
+  la conciliación de pagos como requisitos obligatorios en la Definición de
+  Hecho desde el primer sprint.
+  \item La gestión de cambios es la actividad transversal crítica: toda idea
+  nueva entra al backlog, nunca al sprint en curso, para que la volatilidad no
+  ponga en riesgo la fecha de las fiestas.
+\end{itemize}
+
+% ---------------------------------------------------------------------
+% Referencias en formato IEEE desde el archivo referencias.bib
+\renewcommand{\refname}{Referencias}
+{\small
+\bibliographystyle{IEEEtran}
+\bibliography{referencias}}
+
+\end{document}

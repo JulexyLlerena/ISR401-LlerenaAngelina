@@ -14,6 +14,8 @@
 \usepackage{float}
 \usepackage{longtable}
 \usepackage{hyperref}
+\usepackage{float}
+\usepackage{placeins}
 
 \geometry{margin=2.5cm}
 \renewcommand{\arraystretch}{1.3}
@@ -503,21 +505,42 @@ Riesgo 2 y mitigación & \\
 \end{tabularx}
 \end{table}
 
-
 % ESCENARIO 4
 
 \section{Escenario 4. Plataforma web para una cooperativa de productores de cacao con socios dispersos}
 
 \subsection{Descripción del escenario}
 
+La Cooperativa Agroproductiva Frutos del Estero (organización ficticia creada para esta actividad) agrupa
+a 640 pequeños productores de cacao de recintos rurales de Mocache, Ventanas y Valencia. La cooperativa acopia el cacao en un centro ubicado en Mocache, lo vende a exportadores y paga a cada
+socio según el peso, la humedad y la calidad de su entrega. Hoy las entregas se anotan en tarjetas de
+papel, las liquidaciones se calculan en una hoja de cálculo y los socios se quejan de que no entienden
+cómo se calculó su pago ni cuánto deben de los pequeños créditos para insumos. La directiva quiere
+una plataforma web donde los socios consulten entregas, liquidaciones y saldos de crédito, y donde la
+cooperativa publique avisos y convocatorias a asambleas.
+
+La gerente, Ing. Patricia Vera (persona ficticia), está disponible casi a diario, pero no puede decidir sola:
+los cambios importantes los aprueba la directiva en su reunión mensual. Los socios viven lejos y solo se
+les puede consultar los días de acopio o en las asambleas trimestrales; muchos tienen poca experiencia
+con tecnología. Las reglas de liquidación están en el estatuto y son estables, pero los compradores exportadores cambian cada temporada los requisitos de trazabilidad y certificación del cacao, y la plataforma
+deberá registrarlos. Se manejará dinero de los socios y datos personales, y la cooperativa está sujeta
+al control del organismo que supervisa a la economía popular y solidaria. El proyecto se financia con
+una donación que exige informes semestrales de avance con funciones terminadas. El equipo es de 4
+personas y el plazo es de 12 meses. En el centro de acopio la conexión a internet es inestable, por lo que
+el registro de entregas debe funcionar sin conexión y sincronizarse después.
+
+\FloatBarrier
 \subsection{Matriz comparativa}
 
 \begin{table}[H]
 \centering
 \caption{Matriz comparativa del escenario 4}
-\small
+\label{tab:matriz_escenario4}
+\footnotesize
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{2.4cm} Y Y Y
+    >{\raggedright\arraybackslash}p{2.35cm} Y Y Y
 }
 \toprule
 \textbf{Criterio} &
@@ -526,58 +549,151 @@ Riesgo 2 y mitigación & \\
 \textbf{Ágil} \\
 \midrule
 
-\textbf{K1. Estabilidad y cambios} & & & \\
+\textbf{K1. Estabilidad y cambios}
+&
+Poco conveniente, porque los requisitos de trazabilidad y certificación cambian cada temporada y podrían modificar lo definido al inicio.
+&
+Conveniente, porque las reglas de liquidación pueden establecerse inicialmente y los requisitos de trazabilidad actualizarse en ciclos posteriores.
+&
+Conveniente, porque permite incorporar cambios frecuentes de los compradores mediante la actualización continua de prioridades.
+\\
 \midrule
-\textbf{K2. Partes interesadas y disponibilidad} & & & \\
+
+\textbf{K2. Partes interesadas y disponibilidad}
+&
+Conveniente en parte, porque la gerente está disponible casi a diario y la directiva puede aprobar requisitos en reuniones mensuales. Sin embargo, los socios participan pocas veces.
+&
+Conveniente, porque permite revisar cada incremento con la gerente y aprovechar los días de acopio y las asambleas para validar las necesidades de los socios.
+&
+Poco conveniente, porque la participación frecuente de los socios es difícil y la gerente no tiene autoridad para aprobar por sí sola los cambios importantes.
+\\
 \midrule
-\textbf{K3. Tipo de sistema y criticidad} & & & \\
+
+\textbf{K3. Tipo de sistema y criticidad}
+&
+Conveniente en parte, porque el manejo de dinero, créditos y datos personales requiere requisitos definidos y revisiones cuidadosas antes de la implementación.
+&
+Muy conveniente, porque permite implementar y comprobar progresivamente las funciones de entregas, liquidaciones y créditos antes de ampliar el sistema.
+&
+Conveniente en parte, porque facilita adaptar las funcionalidades, pero los cambios frecuentes necesitan controles para evitar errores en los pagos y datos de los socios.
+\\
 \midrule
-\textbf{K4. Riesgo principal} & & & \\
+
+\textbf{K4. Riesgo principal}
+&
+Poco conveniente, porque los problemas del funcionamiento sin conexión y los cambios de trazabilidad podrían descubrirse tarde, cuando modificar el sistema resulte más costoso.
+&
+Muy conveniente, porque permite probar desde los primeros ciclos el registro sin conexión, la sincronización y las funcionalidades principales.
+&
+Conveniente, porque permite recibir retroalimentación y ajustar funcionalidades, aunque la poca disponibilidad de los socios dificulta validar continuamente los cambios.
+\\
 \midrule
-\textbf{K5. Documentación y marco normativo o contractual} & & & \\
+
+\textbf{K5. Documentación y marco normativo o contractual}
+&
+Conveniente, porque facilita establecer documentación formal de los requisitos y mantener registros de las decisiones relacionadas con el manejo del dinero y los datos personales.
+&
+Muy conveniente, porque permite mantener documentación actualizada por versiones y presentar funciones terminadas en los informes semestrales del donante.
+&
+Conveniente en parte, porque permite documentar los cambios por entregas, pero debe evitarse que la documentación sea insuficiente para las necesidades de control del proyecto.
+\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\FloatBarrier
 \subsection{Recomendación y riesgos}
 
 \begin{table}[H]
 \centering
 \caption{Recomendación y riesgos del escenario 4}
+\label{tab:recomendacion_escenario4}
 \small
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{
     >{\raggedright\arraybackslash}p{3.5cm} Y
 }
 \toprule
 \textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Modelo recomendado & \\
+
+Modelo recomendado
+&
+Iterativo e incremental.
+\\
 \midrule
-Razón 1 & \\
+
+Razón 1 (K1)
+&
+Las reglas de liquidación están establecidas en el estatuto y son estables, mientras que los requisitos de trazabilidad y certificación cambian cada temporada. Por ello, se pueden desarrollar inicialmente las funciones de liquidación y actualizar las de trazabilidad en ciclos posteriores.
+\\
 \midrule
-Razón 2 & \\
+
+Razón 2 (K2)
+&
+La gerente está disponible casi a diario, pero los cambios importantes necesitan aprobación de la directiva en sus reuniones mensuales. El modelo iterativo e incremental permite organizar las revisiones según la disponibilidad de cada participante, sin depender de reuniones continuas.
+\\
 \midrule
-Razón 3 & \\
+
+Razón 3 (K5)
+&
+El donante solicita informes semestrales con funciones terminadas. Los incrementos permiten presentar avances verificables y mantener la documentación de los requisitos actualizada durante el desarrollo.
+\\
 \midrule
-Por qué se descartan los otros dos modelos & \\
+
+Por qué se descartan los otros dos modelos
+&
+\textbf{Secuencial (cascada):} se descarta porque los requisitos de trazabilidad y certificación cambian cada temporada, lo que podría generar modificaciones costosas si todo se define al inicio.
+
+\medskip
+
+\textbf{Ágil:} se descarta porque los socios tienen poca disponibilidad para participar continuamente y la gerente no puede aprobar sola los cambios importantes.
+\\
 \midrule
-Tensión principal del escenario & \\
+
+Tensión principal del escenario
+&
+Aunque el modelo iterativo e incremental es el más conveniente, los cambios frecuentes en los requisitos de trazabilidad y certificación de los compradores apuntan hacia el modelo ágil, debido a que requieren adaptaciones continuas.
+\\
 \midrule
-Riesgo 1 y mitigación & \\
+
+Riesgo 1 y mitigación
+&
+\textbf{Riesgo:} los cambios en los requisitos de trazabilidad podrían no identificarse a tiempo entre iteraciones.
+
+\medskip
+
+\textbf{Mitigación:} consultar periódicamente los nuevos requisitos de los compradores y actualizar los requisitos antes de iniciar cada iteración.
+\\
 \midrule
-Riesgo 2 y mitigación & \\
+
+Riesgo 2 y mitigación
+&
+\textbf{Riesgo:} la sincronización de datos podría generar inconsistencias al trabajar sin conexión.
+
+\medskip
+
+\textbf{Mitigación:} realizar pruebas de funcionamiento sin conexión y sincronización en cada incremento antes de implementarlo.
+\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\FloatBarrier
 \subsection{Actores y framework de Ingeniería de Requisitos}
 
 \subsubsection{Identificación de actores}
 
+Se identifican las partes interesadas que intervienen directamente en el proceso de requisitos y aquellas externas que establecen condiciones que deben considerarse durante el desarrollo.
+
 \begin{table}[H]
 \centering
 \caption{Actores del escenario 4}
+\label{tab:actores_escenario4}
 \small
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{4pt}
 \begin{tabularx}{\textwidth}{
     >{\raggedright\arraybackslash}p{2.8cm} Y Y
 }
@@ -586,25 +702,77 @@ Riesgo 2 y mitigación & \\
 \textbf{Rol en el proceso de requisitos} &
 \textbf{Cuándo y cómo participa} \\
 \midrule
-& & \\
+
+Gerente (Ing. Patricia Vera)
+&
+\textbf{Directo.} Representa a la cooperativa y comunica sus necesidades y prioridades.
+&
+Participa casi a diario, proporciona información y revisa los avances del proyecto.
+\\
 \midrule
-& & \\
+
+Directiva
+&
+\textbf{Directo.} Aprueba los cambios importantes y toma decisiones sobre el proyecto.
+&
+Participa en reuniones mensuales para revisar y aprobar los cambios que correspondan.
+\\
 \midrule
-& & \\
+
+Socios productores
+&
+\textbf{Directos.} Son los usuarios finales de la plataforma y expresan sus necesidades de consulta.
+&
+Participan durante los días de acopio y las asambleas trimestrales mediante consultas y pruebas de las funcionalidades.
+\\
 \midrule
-& & \\
+
+Equipo del proyecto
+&
+\textbf{Directo.} Analiza, documenta, desarrolla y prueba los requisitos.
+&
+Participa durante todo el desarrollo mediante actividades de elicitación, documentación, validación y gestión de requisitos.
+\\
 \midrule
-& & \\
+
+Compradores exportadores
+&
+\textbf{Indirectos.} Establecen los requisitos de trazabilidad y certificación del cacao.
+&
+Sus requisitos se consultan en cada temporada para actualizar las necesidades del sistema.
+\\
+\midrule
+
+Organismo supervisor
+&
+\textbf{Indirecto.} Establece condiciones de control que la cooperativa debe considerar.
+&
+Sus disposiciones se toman en cuenta al definir y revisar los requisitos de la plataforma.
+\\
+\midrule
+
+Donante
+&
+\textbf{Indirecto.} Establece condiciones para el seguimiento y financiamiento del proyecto.
+&
+Recibe informes semestrales de avance con funciones terminadas.
+\\
 \bottomrule
 \end{tabularx}
 \end{table}
 
+\FloatBarrier
 \subsubsection{Actividades centrales, transversales y artefactos}
+
+Para aplicar el framework de Ingeniería de Requisitos de Pohl, se organizan las actividades centrales de elicitación, documentación, negociación y validación. De manera transversal, se considera la gestión de requisitos durante las cuatro iteraciones propuestas.
 
 \begin{table}[H]
 \centering
 \caption{Aplicación del framework de IR en el escenario 4}
+\label{tab:framework_escenario4}
 \scriptsize
+\renewcommand{\arraystretch}{1.05}
+\setlength{\tabcolsep}{3pt}
 \begin{tabularx}{\textwidth}{
     >{\raggedright\arraybackslash}p{2.1cm} Y Y Y
 }
@@ -614,16 +782,74 @@ Riesgo 2 y mitigación & \\
 \textbf{Actividades transversales} &
 \textbf{Artefactos producidos} \\
 \midrule
-& & & \\
+
+\textbf{Iteración 1: Análisis inicial}
+&
+\textbf{Elicitación:} recopilar las necesidades de la gerente, la directiva y los socios mediante entrevistas y consultas durante los días de acopio y las asambleas.
+
+\textbf{Documentación:} registrar las funciones principales de la plataforma y los requisitos iniciales.
+
+\textbf{Negociación:} acordar las prioridades y el alcance inicial con la gerente y la directiva.
+&
+\textbf{Validación:} revisar los requisitos con la gerente y gestionar su aprobación con la directiva.
+
+\textbf{Gestión:} establecer una primera versión de los requisitos y registrar las decisiones y cambios.
+&
+Metas del sistema, escenarios de consulta, requisitos iniciales y registro de decisiones.
+\\
 \midrule
-& & & \\
+
+\textbf{Iteración 2: Entregas y liquidaciones}
+&
+\textbf{Elicitación:} recopilar las necesidades para registrar entregas, calcular liquidaciones y consultar créditos.
+
+\textbf{Documentación:} especificar los requisitos relacionados con el peso, la humedad, la calidad y los cálculos de pago.
+
+\textbf{Negociación:} acordar los criterios de registro y consulta con la cooperativa.
+&
+\textbf{Validación:} revisar los cálculos de liquidación con la gerente y algunos socios productores para comprobar que los resultados sean comprensibles.
+
+\textbf{Gestión:} registrar los cambios y mantener actualizados los requisitos.
+&
+Escenarios de registro de entregas, liquidaciones y consulta de créditos; requisitos funcionales y criterios de aceptación.
+\\
 \midrule
-& & & \\
+
+\textbf{Iteración 3: Trazabilidad y funcionamiento sin conexión}
+&
+\textbf{Elicitación:} identificar los requisitos de trazabilidad, certificación, registro sin conexión y sincronización.
+
+\textbf{Documentación:} especificar las condiciones de funcionamiento sin conexión y actualización posterior de los datos.
+
+\textbf{Negociación:} acordar los cambios necesarios según los requisitos de los compradores.
+&
+\textbf{Validación:} comprobar los requisitos de trazabilidad con las condiciones comunicadas por los compradores y probar el registro y la sincronización.
+
+\textbf{Gestión:} controlar las modificaciones y mantener las versiones actualizadas.
+&
+Escenarios de trazabilidad, requisitos de funcionamiento sin conexión, requisitos de sincronización y especificaciones actualizadas.
+\\
 \midrule
-& & & \\
+
+\textbf{Iteración 4: Consultas y cierre}
+&
+\textbf{Elicitación:} recopilar las necesidades relacionadas con consultas, avisos y convocatorias de asambleas.
+
+\textbf{Documentación:} completar los requisitos de las funcionalidades y las condiciones de uso de la plataforma.
+
+\textbf{Negociación:} revisar los requisitos pendientes y acordar cuáles se incorporarán al alcance final.
+&
+\textbf{Validación:} realizar pruebas de consulta y navegación con socios productores, considerando su poca experiencia tecnológica, y revisar las funcionalidades con la gerente.
+
+\textbf{Gestión:} revisar los requisitos pendientes y mantener la especificación final actualizada.
+&
+Requisitos finales, escenarios de uso, resultados de validación y especificación actualizada del sistema.
+\\
 \bottomrule
 \end{tabularx}
 \end{table}
+
+\FloatBarrier
 
 
 % FIN DEL DOCUMENTO

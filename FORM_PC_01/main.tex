@@ -148,32 +148,25 @@ memoria limitada.
 
 \subsection{Matriz comparativa}
 
-\begin{table}[H]
-\centering
-\caption{Matriz comparativa del escenario 1}
-\small
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{2.4cm} Y Y Y
-}
+\begingroup\footnotesize\setlength{\tabcolsep}{3pt}
+\begin{longtable}{>{\raggedright\arraybackslash}p{2.0cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}p{4.0cm} >{\raggedright\arraybackslash}p{4.0cm}}
+\caption{Matriz comparativa del escenario 1}\\
 \toprule
-\textbf{Criterio} &
-\textbf{Secuencial (cascada)} &
-\textbf{Iterativo e incremental} &
-\textbf{Ágil} \\
+\textbf{Criterio} & \textbf{Secuencial (cascada)} & \textbf{Iterativo e incremental} & \textbf{Ágil} \\
 \midrule
-
-\textbf{K1. Estabilidad y cambios} & & & \\
+\endfirsthead
+\toprule
+\textbf{Criterio} & \textbf{Secuencial (cascada)} & \textbf{Iterativo e incremental} & \textbf{Ágil} \\
 \midrule
-\textbf{K2. Partes interesadas y disponibilidad} & & & \\
-\midrule
-\textbf{K3. Tipo de sistema y criticidad} & & & \\
-\midrule
-\textbf{K4. Riesgo principal} & & & \\
-\midrule
-\textbf{K5. Documentación y marco normativo o contractual} & & & \\
+\endhead
+\textbf{K1. Estabilidad y cambios} & \textbf{Conveniente en parte.} Las reglas de seguridad del fabricante son estables y encajan. Pero la interfaz, los reportes y el protocolo de sensores siguen sin definir hasta el mes 3; cerrar los requisitos ahora obliga a abrir cambios formales costosos cuando se elija el proveedor. & \textbf{Muy conveniente.} El escenario tiene un núcleo estable (funciones de seguridad) y una parte volátil (interfaz, sensores). El modelo permite congelar el núcleo en las primeras iteraciones y tratar el protocolo de sensores como un elemento que se incorpora después del mes 3. & \textbf{Poco conveniente.} La volatilidad que el modelo absorbe bien no viene aquí del cliente sino de un proveedor externo que tarda tres meses; durante ese tiempo el equipo no puede iterar sobre el hardware real, lo que limita la ventaja principal del modelo. \\ \midrule
+\textbf{K2. Partes interesadas y disponibilidad} & \textbf{Poco conveniente.} La fase de elicitación cerrada supone disponibilidad sostenida. Con el jefe de planta solo dos mañanas por semana y los operadores en turnos rotativos, esa fase puede estirarse o quedar incompleta antes de que comience el diseño. & \textbf{Conveniente.} Las dos ventanas semanales del jefe de planta son suficientes para revisar el avance de cada iteración. El responsable de seguridad puede aprobar cada función de protección al cierre de la iteración en que se desarrolla, sin revisar el sistema completo al final. & \textbf{Poco conveniente.} El modelo necesita retroalimentación muy frecuente del cliente. Que el jefe de planta solo esté disponible dos mañanas por semana hace imposible la cadencia corta de demo-feedback-ajuste que los sprints exigen. \\ \midrule
+\textbf{K3. Tipo de sistema y criticidad} & \textbf{Conveniente en parte.} La documentación exhaustiva se ajusta a la criticidad muy alta del sistema. El problema es que el diseño de arquitectura se aprobaría antes de conocer el hardware de sensores (mes 3), con riesgo de quedar obsoleto si el protocolo elegido no coincide con el supuesto. & \textbf{Muy conveniente.} Verificar cada función de seguridad en ciclos cortos y aislados reduce el riesgo de que un fallo en el núcleo (bloqueo de compuertas, control de presión) se descubra solo al final, cuando el controlador ya opera sin internet y con memoria limitada. & \textbf{Poco conveniente.} El modelo puede producir documentación técnica, pero añadirle la trazabilidad formal que exige un sistema embebido de criticidad muy alta —donde ya hubo quemaduras a un operador— le demanda más proceso del que su naturaleza prevé y duplica el esfuerzo del equipo. \\ \midrule
+\textbf{K4. Riesgo principal} & \textbf{Poco conveniente.} Si la arquitectura se cierra antes del mes 3 y el proveedor elegido impone un protocolo distinto al supuesto, el rediseño puede invalidar trabajo ya aprobado y retrasar la puesta en marcha antes de la temporada alta. & \textbf{Muy conveniente.} Se planifica una iteración de integración con hardware para después del mes 3, cuando se adjudique el proveedor. Mientras tanto el equipo avanza en las funciones de seguridad ya definidas, sin detener el proyecto por la incertidumbre del protocolo. & \textbf{Conveniente en parte.} El modelo tolera incertidumbre técnica, pero hasta el mes 3 no hay hardware real con qué probar las interfaces de sensor. Las primeras iteraciones dependerían de simulaciones que pueden no coincidir con el equipo finalmente elegido. \\ \midrule
+\textbf{K5. Documentación y marco normativo o contractual} & \textbf{Conveniente en parte.} Produce de forma natural el documento de requisitos de seguridad aprobado y el plan de pruebas que la aseguradora exige antes de la puesta en marcha. La tensión aparece al mes 3: actualizar ese documento ya firmado por cambios en sensores e interfaz añade tiempo y coste. & \textbf{Muy conveniente.} Las funciones de seguridad se documentan y se genera su evidencia de prueba en las primeras iteraciones, cumpliendo el requisito de la aseguradora antes de la puesta en marcha. La documentación de interfaz y sensores llega después, sin reabrir lo ya aprobado. & \textbf{Poco conveniente.} El modelo puede documentar, pero las historias de usuario y los criterios de aceptación de sprint no cubren por sí solos el documento formal de requisitos de seguridad ni la evidencia estructurada de pruebas que la aseguradora exige; ajustarlo para producirlos le añade una capa de proceso que va más allá de su estructura habitual. \\ \midrule
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 \subsection{Recomendación y riesgos}
 

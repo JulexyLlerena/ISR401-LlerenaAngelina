@@ -667,55 +667,249 @@ y documentar las restricciones identificadas. \\
 
 \subsubsection{Identificación de actores}
 
-\begin{table}[H]
-\centering
-\caption{Actores del escenario 3}
-\small
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{2.8cm} Y Y
+En el proyecto participan actores que toman decisiones, aportan
+información sobre los trámites o establecen condiciones que
+deben cumplirse. La comunicación oficial se realiza por
+medio del administrador del contrato.
+
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{3.0cm}
+>{\raggedright\arraybackslash}p{5.2cm}
+>{\raggedright\arraybackslash}p{6.7cm}
 }
+
+\caption{Actores del escenario 3}\\
 \toprule
-\textbf{Actor del escenario} &
+\textbf{Actor} &
 \textbf{Rol en el proceso de requisitos} &
 \textbf{Cuándo y cómo participa} \\
 \midrule
-GAD Municipal de San Isidro del Baba & Es la entidad contratante. Define los objetivos del sistema y verifica que los entregables cumplan con las condiciones del contrato. & Participa en las aprobaciones formales de requisitos, pruebas y entrega definitiva. \\
+\endfirsthead
+
+\toprule
+\textbf{Actor} &
+\textbf{Rol en el proceso de requisitos} &
+\textbf{Cuándo y cómo participa} \\
 \midrule
-Lcdo. Fabián Zambrano (administrador del contrato) & Es el contacto oficial entre el municipio y el equipo desarrollador. Coordina las consultas y comunica las decisiones autorizadas. & Mantiene reuniones semanales con el equipo y convoca a los funcionarios cuando se necesita revisar algún requisito. \\
+\endhead
+
+GAD Municipal de San Isidro del Baba &
+Es la entidad contratante y responsable de recibir
+los entregables establecidos en el contrato. &
+Interviene en las aprobaciones formales de la ERS,
+el sistema probado y la entrega definitiva. \\
 \midrule
-Funcionarios de rentas y ventanilla & Son usuarios internos que conocen los procedimientos de patentes, permisos y certificados. Ayudan a identificar las necesidades reales del sistema. & Participan en entrevistas y revisiones programadas por el administrador. También validan los procedimientos antes de la entrega. \\
+
+Lcdo. Fabián Zambrano &
+Es el administrador del contrato y el único canal
+oficial de comunicación entre el municipio y la
+empresa contratista. &
+Mantiene reuniones semanales con el equipo.
+También convoca a los funcionarios cuando
+es necesario aclarar o validar requisitos. \\
 \midrule
-Ciudadanos del municipio & Son los usuarios finales del sistema web. Necesitan realizar sus trámites de manera sencilla y consultar su información. & Sus necesidades se consideran durante la elicitación y pueden participar en pruebas de usabilidad si el municipio las organiza. \\
+
+Jefa de rentas &
+Conoce los procedimientos de patentes y las reglas
+de cobro. Es una fuente importante de requisitos
+funcionales. &
+Participa cuando Zambrano la convoca. Debe revisar
+el flujo de patentes, que ya modificó dos veces,
+y los posibles cambios en las tasas municipales. \\
 \midrule
-Equipo desarrollador y analista de requisitos & El analista obtiene, documenta y negocia los requisitos. Los desarrolladores implementan el sistema y el equipo de pruebas comprueba su funcionamiento. & Participan durante todo el proyecto, desde el levantamiento de requisitos hasta las pruebas y la entrega final. \\
+
+Técnicos de ventanilla &
+Son usuarios internos que conocen cómo se reciben
+y procesan actualmente las solicitudes. &
+Participan en entrevistas y revisiones programadas
+para explicar los trámites y comprobar que
+los procedimientos estén correctamente definidos. \\
+\midrule
+
+Concejo municipal &
+Es un actor externo al desarrollo que puede
+establecer nuevas reglas mediante ordenanzas. &
+Su participación es indirecta. Una posible
+ordenanza de tasas en el mes 4 puede generar
+cambios en los requisitos de cálculo de cobros. \\
+\midrule
+
+Personal de TI del municipio &
+Conoce los servidores institucionales y puede
+aportar información sobre la base catastral.
+Su intervención técnica se propone para reducir
+la incertidumbre de integración. &
+El equipo solicita su participación mediante
+Zambrano durante los meses 1 y 2, antes de
+aprobar la ERS y definir la integración definitiva. \\
+\midrule
+
+Ciudadanos &
+Son los usuarios finales del sistema web.
+Necesitan realizar trámites y consultar su estado. &
+El escenario no confirma su participación directa.
+Como actividad propuesta, podrían colaborar
+en pruebas de usabilidad organizadas por el GAD. \\
+\midrule
+
+Equipo contratista (6 personas) &
+Es responsable de analizar, documentar,
+desarrollar y verificar los requisitos del sistema.
+La existencia de un equipo de pruebas separado
+no está confirmada en el escenario. &
+Participa durante todo el proyecto, desde
+la elicitación hasta las pruebas y la entrega,
+respetando el canal oficial de comunicación. \\
+
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
+
 
 \subsubsection{Actividades centrales, transversales y artefactos}
 
-\begin{table}[H]
-\centering
-\caption{Aplicación del framework de IR en el escenario 3}
+Para aplicar el framework de Pohl, se consideran
+las actividades centrales de elicitación, documentación
+y negociación. La validación y la gestión de requisitos
+se realizan de manera transversal durante el proyecto.
+Los artefactos incluyen metas, escenarios de uso
+y requisitos orientados a la solución.
+
+\begingroup
 \scriptsize
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{2.1cm} Y Y Y
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{2.3cm}
+>{\raggedright\arraybackslash}p{4.2cm}
+>{\raggedright\arraybackslash}p{4.2cm}
+>{\raggedright\arraybackslash}p{4.2cm}
 }
+
+\caption{Aplicación del framework de IR en el escenario 3}\\
 \toprule
 \textbf{Fase o iteración} &
 \textbf{Actividades centrales} &
 \textbf{Actividades transversales} &
 \textbf{Artefactos producidos} \\
-Meses 1--2: levantamiento y aprobación de requisitos & \textbf{Elicitación:} reuniones con el administrador del contrato y entrevistas programadas a los funcionarios de rentas y ventanilla. \textbf{Documentación:} registrar requisitos de patentes, permisos, certificados y cobros. \textbf{Negociación:} acordar el alcance y resolver diferencias antes de aprobar la especificación. & \textbf{Validación:} revisar los requisitos con los funcionarios y obtener la aprobación correspondiente. \textbf{Gestión:} establecer la línea base y registrar la trazabilidad de los requisitos. & Objetivos del sistema, escenarios de uso, ERS aprobada, matriz de trazabilidad y acta de aprobación. \\
 \midrule
-Meses 2--3: diseño y revisión técnica & \textbf{Elicitación:} aclarar dudas sobre los datos catastrales y las reglas de cobro. \textbf{Documentación:} detallar interfaces y restricciones de integración. \textbf{Negociación:} acordar soluciones técnicas sin modificar el alcance aprobado. & \textbf{Validación:} comprobar que el diseño corresponda con los requisitos. \textbf{Gestión:} registrar aclaraciones y evaluar solicitudes de cambio. & Especificaciones de interfaces, prototipo de pantallas, informe de prueba de conexión catastral y registro de cambios. \\
+\endfirsthead
+
+\toprule
+\textbf{Fase o iteración} &
+\textbf{Actividades centrales} &
+\textbf{Actividades transversales} &
+\textbf{Artefactos producidos} \\
 \midrule
-Meses 4--6: construcción y pruebas & \textbf{Elicitación:} consultar las dudas que aparezcan al implementar los trámites. \textbf{Documentación:} actualizar los requisitos cuando existan cambios autorizados. \textbf{Negociación:} revisar el impacto de una posible nueva ordenanza de tasas. & \textbf{Validación:} ejecutar pruebas funcionales y verificar cálculos de cobros y protección de datos. \textbf{Gestión:} controlar versiones, cambios y trazabilidad entre requisitos y pruebas. & Casos de prueba, resultados de validación, matriz de trazabilidad actualizada y sistema instalado y probado en el mes 6. \\
+\endhead
+
+\textbf{Meses 1--2: requisitos y verificación inicial} &
+\textbf{Elicitación:} obtener información del administrador,
+la jefa de rentas y los técnicos de ventanilla.
+Solicitar mediante Zambrano acceso a TI para
+examinar la integración catastral.
+
+\par\medskip
+\textbf{Documentación:} especificar los trámites,
+los cobros, las restricciones técnicas y los datos.
+
+\par\medskip
+\textbf{Negociación:} acordar el alcance antes
+de aprobar la ERS. &
+\textbf{Validación:} revisar los requisitos con
+los funcionarios y realizar una prueba temprana
+de conexión catastral antes del mes 2.
+
+\par\medskip
+\textbf{Gestión:} establecer la línea base
+y registrar la trazabilidad de los requisitos. &
+Metas del sistema, escenarios de uso, informe
+de viabilidad de integración catastral,
+matriz de trazabilidad y ERS aprobada.
+
+La ERS contiene los \textbf{requisitos orientados
+a la solución} del framework de Pohl. \\
 \midrule
-Mes 7: capacitación y entrega definitiva & \textbf{Elicitación:} recoger dudas de los funcionarios durante la capacitación. \textbf{Documentación:} preparar manuales e instrucciones de uso. \textbf{Negociación:} acordar la atención de observaciones pendientes conforme al contrato. & \textbf{Validación:} comprobar el cumplimiento de los requisitos y realizar la aceptación final. \textbf{Gestión:} cerrar los cambios aprobados y conservar los documentos definitivos. & Manual de usuario, registro de capacitación, matriz de trazabilidad final y acta de entrega y recepción. \\
+
+\textbf{Meses 2--3: diseño y preparación técnica} &
+\textbf{Elicitación:} aclarar detalles técnicos
+pendientes que no modifiquen el alcance aprobado.
+
+\par\medskip
+\textbf{Documentación:} detallar las interfaces
+y las reglas de integración.
+
+\par\medskip
+\textbf{Negociación:} acordar soluciones técnicas
+respetando los requisitos aprobados. &
+\textbf{Validación:} comprobar mediante revisiones
+y prototipos que el diseño responda a la ERS.
+
+\par\medskip
+\textbf{Gestión:} registrar aclaraciones
+y evaluar las solicitudes de cambio. &
+Especificaciones de interfaces, prototipos
+de pantallas, registro de decisiones y
+documentación técnica de integración. \\
+\midrule
+
+\textbf{Meses 4--6: desarrollo y pruebas} &
+\textbf{Elicitación:} consultar dudas que aparezcan
+durante la implementación de los trámites.
+
+\par\medskip
+\textbf{Documentación:} actualizar los requisitos
+solo cuando existan modificaciones autorizadas.
+
+\par\medskip
+\textbf{Negociación:} analizar el impacto de
+una posible nueva ordenanza de tasas. &
+\textbf{Validación:} comprobar los cálculos de cobro,
+la protección de datos y el funcionamiento
+de los trámites.
+
+\par\medskip
+\textbf{Gestión:} si llega una nueva ordenanza,
+registrar la solicitud, evaluar su impacto
+y tramitar la autorización contractual mediante
+Zambrano antes de modificar la línea base. &
+Registro de cambios autorizados, requisitos
+actualizados, casos de prueba, matriz de
+trazabilidad e informe de pruebas del sistema
+instalado en el mes 6. \\
+\midrule
+
+\textbf{Mes 7: capacitación y entrega definitiva} &
+\textbf{Elicitación:} recoger dudas de los
+funcionarios durante la capacitación.
+
+\par\medskip
+\textbf{Documentación:} preparar los manuales
+y consolidar los documentos finales.
+
+\par\medskip
+\textbf{Negociación:} acordar el tratamiento
+de observaciones pendientes conforme al contrato. &
+\textbf{Validación:} verificar el cumplimiento
+de los requisitos y realizar la aceptación final.
+
+\par\medskip
+\textbf{Gestión:} cerrar los cambios autorizados
+y conservar la trazabilidad definitiva. &
+Manuales, registro de capacitación,
+especificación final de requisitos,
+matriz de trazabilidad y acta de
+entrega-recepción definitiva. \\
+
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 % ESCENARIO 4
 

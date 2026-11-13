@@ -539,34 +539,129 @@ El Lcdo. Fabián Zambrano, administrador del contrato, se reúne una vez por sem
 
 \subsection{Recomendación y riesgos}
 
-\begin{table}[H]
-\centering
-\caption{Recomendación y riesgos del escenario 3}
+\begingroup
 \small
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{3.5cm} Y
+\setlength{\tabcolsep}{4pt}
+\renewcommand{\arraystretch}{1.15}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{3.2cm}
+>{\raggedright\arraybackslash}p{11.7cm}
 }
+
+\caption{Recomendación y riesgos del escenario 3}\\
 \toprule
 \textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Modelo recomendado & Secuencial (cascada), con revisiones tempranas y control formal de cambios. \\
+\endfirsthead
+
+\toprule
+\textbf{Elemento} & \textbf{Respuesta} \\
 \midrule
-Razón 1 & El contrato exige aprobar la especificación de requisitos en el mes 2. Cascada permite organizar el análisis y la documentación antes de iniciar las siguientes fases. \\
+\endhead
+
+\textbf{Modelo recomendado} &
+Modelo híbrido con base secuencial (cascada) y ciclos cortos
+de validación técnica. La especificación, las aprobaciones
+y el control de cambios siguen un proceso formal. La
+integración catastral y los ajustes técnicos se revisan
+mediante ciclos breves, respetando las condiciones del
+contrato. \\
 \midrule
-Razón 2 & Existen entregables con fechas fijas en los meses 2, 6 y 7, y multas por retrasos. El modelo facilita establecer responsables, documentos y revisiones para cada entrega. \\
+
+\textbf{Criterio de decisión} &
+Se da mayor importancia a K5 porque el contrato establece
+tres entregables con fechas, pagos y multas diarias por
+retraso. Esto también se relaciona con K4, ya que incumplir
+los plazos representa un riesgo económico. Aunque el
+modelo iterativo tiene ventajas en varios criterios,
+la organización contractual hace necesario mantener
+una base secuencial. \\
 \midrule
-Razón 3 & Los funcionarios de rentas y ventanilla no están disponibles continuamente. Por eso, resulta conveniente planificar reuniones y aprobaciones mediante el administrador del contrato. \\
+
+\textbf{Razón 1 (K5)} &
+El municipio exige una ERS aprobada en el mes 2, el sistema
+instalado y probado en el mes 6 y la entrega definitiva
+en el mes 7. La organización secuencial permite planificar
+las aprobaciones y los documentos asociados a cada
+entregable. \\
 \midrule
-Por qué se descartan los otros dos modelos & El iterativo permite probar partes del sistema y adaptarse a cambios, pero necesita coordinar cada incremento con los entregables del contrato. El ágil facilita incorporar nuevas necesidades, aunque resulta menos conveniente porque las decisiones municipales requieren autorizaciones y los usuarios tienen disponibilidad limitada. \\
+
+\textbf{Razón 2 (K4)} &
+Cada día de retraso genera una multa. Además, la base
+catastral antigua no tiene documentación, lo que podría
+provocar problemas de integración. Las pruebas tempranas
+permiten identificar estas dificultades antes de aprobar
+la ERS y reducir el riesgo de incumplimiento. \\
 \midrule
-Tensión principal del escenario & El contrato necesita requisitos aprobados desde el segundo mes, pero el proceso de patentes ya cambió dos veces y podría aprobarse una nueva ordenanza de tasas en el cuarto mes. Esto puede provocar modificaciones después de aprobar la especificación. \\
+
+\textbf{Razón 3 (K1 y K5)} &
+La jefa de rentas ya modificó dos veces el procedimiento
+de patentes y podría aprobarse una nueva ordenanza en
+el mes 4. Si un cambio aumenta el costo, necesita una
+autorización formal que puede tardar semanas. Por eso,
+es necesario controlar las modificaciones sin perder
+de vista el cronograma contractual. \\
 \midrule
-Riesgo 1 y mitigación & \textbf{Riesgo:} una nueva ordenanza podría modificar los cálculos de cobro y afectar los requisitos aprobados. \textbf{Mitigación:} registrar los cambios, evaluar su impacto y solicitar la autorización correspondiente antes de implementarlos. \\
+
+\textbf{Por qué se descartan los otros modelos} &
+\textbf{Cascada pura:} no resulta suficiente porque
+los posibles cambios de tasas y la integración catastral
+necesitan verificaciones tempranas.
+
+\par\medskip
+
+\textbf{Iterativo puro:} facilita las pruebas y los ajustes,
+pero sus incrementos deben coordinarse con los tres
+entregables contractuales, sus pagos y las autorizaciones
+formales.
+
+\par\medskip
+
+\textbf{Ágil puro:} requiere decisiones frecuentes del
+cliente. En este caso, Zambrano es el único canal oficial,
+los funcionarios participan mediante convocatorias y
+existen multas por retraso. \\
 \midrule
-Riesgo 2 y mitigación & \textbf{Riesgo:} la base de datos catastral antigua podría presentar problemas de integración por falta de documentación. \textbf{Mitigación:} realizar una prueba técnica de conexión desde las primeras fases y documentar los problemas encontrados. \\
+
+\textbf{Tensión principal del escenario} &
+La posibilidad de cambios en patentes y tasas favorece
+un enfoque iterativo o ágil. Sin embargo, el municipio
+necesita una especificación aprobada y entregables
+formales. El modelo híbrido combina ambas necesidades:
+mantiene la documentación contractual y permite
+verificaciones técnicas en ciclos cortos. \\
+\midrule
+
+\textbf{Riesgo 1 y mitigación} &
+\textbf{Riesgo:} una nueva ordenanza de tasas en el mes 4
+podría modificar los cálculos de cobro incluidos en la
+ERS aprobada.
+
+\par\medskip
+
+\textbf{Mitigación:} diseñar tasas configurables desde
+el inicio y prever tiempo para gestionar cambios.
+Si la ordenanza afecta el alcance o el costo, registrar
+la solicitud, evaluar su impacto y tramitar la autorización
+formal antes de implementarla. \\
+\midrule
+
+\textbf{Riesgo 2 y mitigación} &
+\textbf{Riesgo:} la falta de documentación de la base
+catastral podría provocar problemas de conexión y
+retrasar el desarrollo.
+
+\par\medskip
+
+\textbf{Mitigación:} solicitar mediante Zambrano el
+acceso al personal de TI y a la base catastral. Realizar
+una prueba técnica antes de aprobar la ERS del mes 2
+y documentar las restricciones identificadas. \\
+
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 \subsection{Actores y framework de Ingeniería de Requisitos}
 

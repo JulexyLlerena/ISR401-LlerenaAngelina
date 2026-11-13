@@ -21,4 +21,4 @@ Informe grupal de ISR-401 (comparación de modelos de proceso de requisitos).
     pdflatex main.tex
 
 Se compila dos veces para que las tablas largas y la numeración queden
-correctas. El resultado es `main.pdf`.
+correctas. El resultado es `FORM_PC_01.pdf`.

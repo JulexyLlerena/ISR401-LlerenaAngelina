@@ -475,32 +475,67 @@ El Lcdo. Fabián Zambrano, administrador del contrato, se reúne una vez por sem
 
 \subsection{Matriz comparativa}
 
-\begin{table}[H]
-\centering
-\caption{Matriz comparativa del escenario 3}
-\small
-\begin{tabularx}{\textwidth}{
-    >{\raggedright\arraybackslash}p{2.4cm} Y Y Y
+\begingroup
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\renewcommand{\arraystretch}{1.1}
+
+\begin{longtable}{
+>{\raggedright\arraybackslash}p{2.2cm}
+>{\raggedright\arraybackslash}p{3.8cm}
+>{\raggedright\arraybackslash}p{3.8cm}
+>{\raggedright\arraybackslash}p{3.8cm}
 }
+
+\caption{Matriz comparativa del escenario 3}\\
 \toprule
 \textbf{Criterio} &
 \textbf{Secuencial (cascada)} &
 \textbf{Iterativo e incremental} &
 \textbf{Ágil} \\
 \midrule
+\endfirsthead
 
-\textbf{K1. Estabilidad y cambios} & \textbf{Media.} Permite aprobar los requisitos en el mes 2, pero una nueva ordenanza en el mes 4 exigiría controlar formalmente los cambios. & \textbf{Alta.} Permite ajustar en ciclos los requisitos de patentes y tasas sin rehacer todo el sistema. & \textbf{Media.} Facilita adaptar las tasas, pero los cambios que afectan el contrato requieren autorización formal. \\
+\toprule
+\textbf{Criterio} &
+\textbf{Secuencial (cascada)} &
+\textbf{Iterativo e incremental} &
+\textbf{Ágil} \\
 \midrule
-\textbf{K2. Partes interesadas y disponibilidad} & \textbf{Alta.} Las reuniones semanales con el administrador permiten organizar revisiones y aprobaciones por fase. & \textbf{Media-alta.} Los funcionarios pueden revisar cada incremento, siempre que el administrador coordine su participación. & \textbf{Baja.} La participación frecuente es difícil porque rentas y ventanilla solo intervienen cuando son convocados. \\
+\endhead
+
+\textbf{K1. Estabilidad y cambios} &
+\textbf{Media.} Permite aprobar una ERS en el mes 2, pero el flujo de patentes ya cambió dos veces y una nueva ordenanza de tasas podría modificarlo en el mes 4. Esto obliga a gestionar cambios formales. &
+\textbf{Alta.} Permite mantener estables los requisitos contractuales e incorporar en ciclos los ajustes del flujo de patentes y las tasas cuando se aclaren. &
+\textbf{Media-alta.} Facilita reorganizar requisitos ante cambios, pero la autorización de modificaciones que incrementen el costo puede tardar semanas. \\
 \midrule
-\textbf{K3. Tipo de sistema y criticidad} & \textbf{Alta.} La especificación formal permite revisar requisitos de cobros municipales y protección de datos antes del desarrollo. & \textbf{Alta.} Permite comprobar por incrementos el funcionamiento de patentes, permisos y certificados. & \textbf{Media.} Puede desarrollar estas funciones, pero necesita documentación y pruebas suficientes para evitar errores en cobros y datos personales. \\
+
+\textbf{K2. Partes interesadas y disponibilidad} &
+\textbf{Media.} Las revisiones pueden planificarse, pero rentas y ventanilla solo participan cuando Zambrano los convoca. Aprobar la ERS en el mes 2 exige coordinar sus respuestas con anticipación. &
+\textbf{Media-alta.} Permite organizar revisiones por ciclo con los funcionarios, siempre mediante Zambrano y según su disponibilidad. &
+\textbf{Baja.} Requiere retroalimentación frecuente, difícil porque Zambrano es el único canal oficial y se reúne semanalmente con el equipo. \\
 \midrule
-\textbf{K4. Riesgo principal} & \textbf{Media.} La integración con la base catastral sin documentación podría descubrir problemas tarde si se deja para las pruebas finales. & \textbf{Alta.} Permite probar tempranamente la conexión catastral y corregir dificultades en ciclos posteriores. & \textbf{Media-alta.} Permite realizar pruebas tempranas, aunque la coordinación y las aprobaciones municipales pueden retrasar los ajustes. \\
+
+\textbf{K3. Tipo de sistema y criticidad} &
+\textbf{Alta.} La ERS formal permite revisar los requisitos de cobros municipales y datos personales. Los errores podrían afectar dinero público y generar reclamos ciudadanos. &
+\textbf{Alta.} Permite verificar por incrementos los trámites, cálculos de cobro y protección de datos antes de integrar todo el sistema. &
+\textbf{Media-alta.} También permite realizar pruebas continuas, pero requiere trazabilidad y documentación suficiente para controlar errores en cobros y datos personales. \\
 \midrule
-\textbf{K5. Documentación y marco normativo o contractual} & \textbf{Alta.} Facilita cumplir los hitos contractuales: ERS aprobada en el mes 2, pruebas en el mes 6 y entrega en el mes 7. & \textbf{Media-alta.} Puede generar documentos aprobados por versiones, pero debe coordinar los incrementos con los hitos del contrato. & \textbf{Media.} Requiere adaptar las entregas cortas a la documentación y aprobaciones formales exigidas en la contratación pública. \\
+
+\textbf{K4. Riesgo principal del proyecto} &
+\textbf{Baja-media.} Los problemas de la base catastral sin documentación podrían detectarse tarde si la integración se deja para el final, provocando retrasos sujetos a multas diarias. &
+\textbf{Alta.} Una prueba temprana de integración permite descubrir dificultades antes de aprobar la ERS del mes 2 y reducir el riesgo de retrasos posteriores. &
+\textbf{Media-alta.} Permite comprobar riesgos técnicos en ciclos cortos, pero los ajustes que afecten el contrato siguen sujetos a autorizaciones formales. \\
+\midrule
+
+\textbf{K5. Documentación y marco normativo o contractual} &
+\textbf{Alta.} Se ajusta a los tres entregables con fecha, pago y multa por retraso: ERS aprobada en el mes 2, sistema probado en el mes 6 y entrega definitiva en el mes 7. &
+\textbf{Media-alta.} Puede producir documentación formal, pero debe coordinar los incrementos con los tres hitos de pago y aprobación del contrato. &
+\textbf{Media.} Sus entregas cortas necesitan adaptarse a las aprobaciones, los pagos por entregable y el procedimiento formal de cambios contractuales. \\
+
 \bottomrule
-\end{tabularx}
-\end{table}
+\end{longtable}
+\endgroup
 
 \subsection{Recomendación y riesgos}
 
